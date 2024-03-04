@@ -1,5 +1,15 @@
+package AnimalGeneral;
 
+import PetAnimals.*;
+import PredatorAnimals.*;
+
+/**
+ * Класс-сервис для работы с Animal
+ */
 public class CreateAnimalService {
+    /**
+     * Метод для создания 10 рандомных животных
+     */
     public void createAnimals() {
         int count = 0;
 
@@ -7,19 +17,21 @@ public class CreateAnimalService {
             int randomAnimal = (int) (Math.random() * 6);
             AbstractAnimal animal = switchAnimal(randomAnimal);
 
-            //Заполняем данные для уникальности животного
-            animal.name = "Animal" + count;
+            animal.name = "Animals.Animal" + count;
             animal.breed = "Breed" + count;
             animal.cost = Math.random() * 10000;
             animal.character = "Character" + count;
 
-            //Выводим данные животного
-            System.out.println(animal.getClass().getSimpleName() + ": " + animal.getName() + ", " + animal.getBreed() + ", " + animal.getCharacter() + ", " + String.format("%.2f",animal.getCost()));
+            System.out.println(animal);
             count++;
         }
     }
 
-    //Вынес создание рандомного животного в отдельный метод
+    /**
+     * Метод для создания рандомного животного
+     * @param randomAnimal - экзмепляр животного, представленный в числовом формате
+     * @return - новый объект животного
+     */
     public AbstractAnimal switchAnimal(int randomAnimal) {
         return switch (randomAnimal) {
             case 0 -> new Dog();
