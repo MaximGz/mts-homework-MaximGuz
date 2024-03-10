@@ -19,8 +19,10 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class SearchServiceImplTest {
     SearchServiceImpl ssi = new SearchServiceImpl();
+
     /**
      * Проверка на корректность вискосного года
+     *
      * @param year - високосный год для проверкм
      * @throws InvalidAnimalBirthDateException - исключение "не заполнена дата рождения"
      */
@@ -43,6 +45,7 @@ class SearchServiceImplTest {
 
     /**
      * Проверка на корректность не вискосного года
+     *
      * @param year - не високосный год для проверкм
      * @throws InvalidAnimalBirthDateException - исключение "не заполнена дата рождения"
      */
@@ -65,6 +68,7 @@ class SearchServiceImplTest {
 
     /**
      * Проверка на исключение InvalidAnimalBirthDateException
+     *
      * @param a - экзмепляр класса AbstractAnimal или его потомки
      */
     @DisplayName("Исключение InvalidAnimalBirthDateException")
