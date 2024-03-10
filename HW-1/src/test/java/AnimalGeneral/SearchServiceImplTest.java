@@ -58,12 +58,12 @@ class SearchServiceImplTest {
         a.birthDate = LocalDate.of(year, 1, 1);
 
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent)); // Redirect System.out to capture output
+        System.setOut(new PrintStream(outContent));
 
         ssi.checkLeapYearAnimal(a);
 
-        String expectedOutput = "Test не был рожден в високосный год.\r\n"; // Expected output when born in a leap year
-        assertEquals(expectedOutput, outContent.toString()); // Check if the output matches the expected output
+        String expectedOutput = "Test не был рожден в високосный год.\r\n";
+        assertEquals(expectedOutput, outContent.toString());
     }
 
     /**
