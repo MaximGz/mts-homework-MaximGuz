@@ -19,6 +19,7 @@ public class CreateAnimalServiceImpl extends CreateAnimalService {
             animal.breed = "Breed" + i;
             animal.character = "Character" + i;
             animal.cost = Math.random() * 10000;
+            animal.birthDate = generateRandomDate();
 
             System.out.println(animal);
         }
@@ -41,6 +42,7 @@ public class CreateAnimalServiceImpl extends CreateAnimalService {
             animal.breed = "Breed" + count;
             animal.character = "Character" + count;
             animal.cost = Math.random() * 10000;
+            animal.birthDate = generateRandomDate();
 
             System.out.println(animal);
             count++;

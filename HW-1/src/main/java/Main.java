@@ -1,5 +1,6 @@
 import AnimalGeneral.CreateAnimalService;
 import AnimalGeneral.CreateAnimalServiceImpl;
+import CustExecptions.InvalidAnimalBirthDateException;
 
 /**
  * Главный класс с вызовом метода main
@@ -12,7 +13,11 @@ public class Main {
     public static void main(String[] args) {
         CreateAnimalService createAnimalService = new CreateAnimalService();
         System.out.println("\nWhile cycle:");
-        createAnimalService.createAnimals();
+        try {
+            createAnimalService.createAnimals();
+        } catch (InvalidAnimalBirthDateException e) {
+            throw new RuntimeException("Работа метода завершилась ошибкой\n" + e);
+        }
 
         CreateAnimalServiceImpl createAnimalServiceImpl = new CreateAnimalServiceImpl();
         System.out.println("\nFor cycle:");
