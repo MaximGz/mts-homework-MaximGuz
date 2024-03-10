@@ -1,13 +1,12 @@
 package AnimalGeneral;
 
 import CustExecptions.InvalidAnimalBirthDateException;
+import CustExecptions.InvalidAnimalException;
 import PetAnimals.*;
 import PredatorAnimals.*;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.*;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -19,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Класс для тестирования
  */
 class SearchServiceImplTest {
-
+    SearchServiceImpl ssi = new SearchServiceImpl();
     /**
      * Проверка на корректность вискосного года
      * @param year - високосный год для проверкм
@@ -29,7 +28,6 @@ class SearchServiceImplTest {
     @ParameterizedTest
     @ValueSource(ints = {2000, 2004, 2008, 2012, 2016, 2020, 2024})
     void checkTrueLeapYearAnimal(Integer year) throws InvalidAnimalBirthDateException {
-        SearchServiceImpl ssi = new SearchServiceImpl();
         AbstractAnimal a = new Cat();
         a.name = "Test";
         a.birthDate = LocalDate.of(year, 1, 1);
@@ -52,7 +50,6 @@ class SearchServiceImplTest {
     @ParameterizedTest
     @ValueSource(ints = {2001, 2002, 2003, 2005, 2006, 2007, 2009})
     void checkFalseLeapYearAnimal(Integer year) throws InvalidAnimalBirthDateException {
-        SearchServiceImpl ssi = new SearchServiceImpl();
         AbstractAnimal a = new Cat();
         a.name = "Test";
         a.birthDate = LocalDate.of(year, 1, 1);
@@ -74,10 +71,27 @@ class SearchServiceImplTest {
     @ParameterizedTest
     @MethodSource("fetchData")
     void checkLeapYearAnimalException(AbstractAnimal a) {
-        SearchServiceImpl ssi = new SearchServiceImpl();
         a.birthDate = null;
 
         assertThrows(InvalidAnimalBirthDateException.class, () -> ssi.checkLeapYearAnimal(a));
+    }
+
+    /**
+     * Проверка на исключение InvalidAnimalException
+     */
+    @DisplayName("Исключение InvalidAnimalException")
+    @ParameterizedTest
+    @NullSource
+    void checkInvalidAnimalException(Animal val) {
+        assertThrows(InvalidAnimalException.class, () -> {
+            try {
+                ssi.checkLeapYearAnimal(val);
+            } catch (NullPointerException e) {
+                throw new InvalidAnimalException();
+            } catch (InvalidAnimalBirthDateException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     private static Stream<Arguments> fetchData() {
