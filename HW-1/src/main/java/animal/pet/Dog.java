@@ -1,6 +1,6 @@
-package PetAnimals;
+package animal.pet;
 
-import AnimalsClassifiers.Pet;
+import animal.classifiers.Pet;
 
 /**
  * Класс для создания собаки

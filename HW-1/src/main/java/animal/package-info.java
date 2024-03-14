@@ -1,4 +1,4 @@
 /**
  * Пакет, содержащий общий функционал для работы с животными
  */
-package AnimalGeneral;
+package animal;

@@ -1,4 +1,4 @@
-package CustExecptions;
+package custexceptions;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -11,5 +11,9 @@ public class InvalidAnimalException extends RuntimeException {
 
     public InvalidAnimalException() {
         super(ERROR_MESSAGE + " " + LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+    }
+
+    public InvalidAnimalException(String msg) {
+        super(msg);
     }
 }

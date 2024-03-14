@@ -1,4 +1,4 @@
 /**
  * Пакет с кастомными исключениями
  */
-package CustExecptions;
+package custexceptions;

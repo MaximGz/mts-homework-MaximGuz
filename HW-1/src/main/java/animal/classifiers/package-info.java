@@ -1,4 +1,4 @@
 /**
  * Пакет, содержащий классификаторы животных
  */
-package AnimalsClassifiers;
+package animal.classifiers;

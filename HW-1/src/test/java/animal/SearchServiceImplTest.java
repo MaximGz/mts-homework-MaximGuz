@@ -1,9 +1,15 @@
-package AnimalGeneral;
+package animal;
 
-import CustExecptions.InvalidAnimalBirthDateException;
-import CustExecptions.InvalidAnimalException;
-import PetAnimals.*;
-import PredatorAnimals.*;
+import animal.pet.Cat;
+import animal.pet.Cow;
+import animal.pet.Dog;
+import animal.predator.Lion;
+import animal.predator.Shark;
+import animal.predator.Wolf;
+import animal.service.SearchServiceImpl;
+import custexceptions.InvalidAnimalBirthDateException;
+import custexceptions.InvalidAnimalException;
+
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
@@ -88,16 +94,10 @@ class SearchServiceImplTest {
     @NullSource
     void checkInvalidAnimalException(Animal val) {
         assertThrows(InvalidAnimalException.class, () -> {
-            try {
-                ssi.checkLeapYearAnimal(val);
-            } catch (NullPointerException e) {
-                throw new InvalidAnimalException();
-            } catch (InvalidAnimalBirthDateException e) {
-                throw new RuntimeException(e);
-            }
-        });
+                ssi.checkLeapYearAnimal(val); });
     }
 
+    //просто для теста аннотации MethodSource, логика необязательна
     private static Stream<Arguments> fetchData() {
         return Stream.of(
                 Arguments.arguments(new Cat()),

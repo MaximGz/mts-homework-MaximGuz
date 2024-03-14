@@ -1,6 +1,6 @@
-package PredatorAnimals;
+package animal.predator;
 
-import AnimalsClassifiers.Predator;
+import animal.classifiers.Predator;
 
 /**
  * Класс для создания волка
