@@ -1,6 +1,7 @@
-package AnimalGeneral;
+package animal.service;
 
-import CustExecptions.InvalidAnimalBirthDateException;
+import animal.Animal;
+import custexceptions.InvalidAnimalBirthDateException;
 
 /**
  * Интерфейс-сервис для поиска

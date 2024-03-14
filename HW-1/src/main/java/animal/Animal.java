@@ -1,4 +1,4 @@
-package AnimalGeneral;
+package animal;
 
 import java.time.LocalDate;
 

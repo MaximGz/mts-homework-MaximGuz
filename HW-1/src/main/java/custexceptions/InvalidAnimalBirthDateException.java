@@ -1,4 +1,4 @@
-package CustExecptions;
+package custexceptions;
 
 /**
  * Exception при отсутствие даты рождения животного

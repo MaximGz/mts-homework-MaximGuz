@@ -1,4 +1,4 @@
-package AnimalGeneral;
+package animal;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -27,6 +27,26 @@ public abstract class AbstractAnimal implements Animal {
      * Дата рождения животного
      */
     protected LocalDate birthDate;
+
+    public void setBreed(String breed) {
+        this.breed = breed;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCost(Double cost) {
+        this.cost = cost;
+    }
+
+    public void setCharacter(String character) {
+        this.character = character;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
 
     /**
      * @return - получаем значение породы
@@ -69,6 +89,6 @@ public abstract class AbstractAnimal implements Animal {
     @Override
     public String toString() {
         return this.getClass().getSimpleName() + ": " + this.getName() + ", " + this.getBreed() + ", " +
-                this.getCharacter() + ", " + String.format("%.2f", this.getCost());
+                this.getCharacter() + ", " + String.format("%.2f", this.getCost()) + ", " + DateTimeFormatter.ofPattern("dd-MM-yyyy").format(birthDate);
     }
 }

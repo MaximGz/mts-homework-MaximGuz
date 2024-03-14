@@ -1,6 +1,6 @@
-package AnimalsClassifiers;
+package animal.classifiers;
 
-import AnimalGeneral.AbstractAnimal;
+import animal.AbstractAnimal;
 
 /**
  * Это родительский класс для всех хищных животных
