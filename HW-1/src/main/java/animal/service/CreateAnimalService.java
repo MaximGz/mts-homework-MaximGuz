@@ -7,7 +7,7 @@ public interface CreateAnimalService {
     /**
      * Дефолт метод по созданию 10 животных
      */
-    default void create10Animals() throws InvalidAnimalBirthDateException {
+    default void createAnimals() throws InvalidAnimalBirthDateException {
         int count = 0;
         SearchServiceImpl ssi = new SearchServiceImpl();
         while (count < 10) {
@@ -29,6 +29,4 @@ public interface CreateAnimalService {
             count++;
         }
     }
-
-    void createAnimals();
 }

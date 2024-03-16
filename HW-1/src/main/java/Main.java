@@ -15,7 +15,7 @@ public class Main {
 
         System.out.println("\nWhile cycle:");
         try {
-            createAnimalServiceImpl.create10Animals();
+            createAnimalServiceImpl.createAnimalsfromInterface();
         } catch (InvalidAnimalBirthDateException e) {
             throw new RuntimeException("Работа метода завершилась ошибкой\n" + e);
         }
