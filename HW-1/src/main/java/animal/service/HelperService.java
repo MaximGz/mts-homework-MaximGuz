@@ -38,7 +38,7 @@ public class HelperService {
     }
 
     /**
-     * Статический метод для генерации рандомной даты
+     * Метод для генерации рандомной даты
      */
     public static LocalDate generateRandomDate() {
         Random random = new Random();

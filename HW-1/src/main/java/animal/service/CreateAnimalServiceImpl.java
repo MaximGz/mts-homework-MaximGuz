@@ -1,6 +1,7 @@
 package animal.service;
 
 import animal.AbstractAnimal;
+import custexceptions.InvalidAnimalBirthDateException;
 
 import static animal.service.HelperService.switchAnimal;
 
@@ -52,5 +53,9 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
             System.out.println(animal);
             count++;
         } while (count < 10);
+    }
+
+    public void createAnimalsfromInterface() throws InvalidAnimalBirthDateException {
+        CreateAnimalService.super.createAnimals();
     }
 }
