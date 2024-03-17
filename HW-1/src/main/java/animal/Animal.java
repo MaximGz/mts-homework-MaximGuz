@@ -26,5 +26,4 @@ public interface Animal {
      * Метод для получения даты рождения
      */
     LocalDate getBirthDate();
-
 }
