@@ -15,7 +15,7 @@ public interface AnimalsRepository {
      * @param animals - массив животных
      * @return - мапа Map<String, LocalDate>
      */
-    Map<String, LocalDate> indLeapYearNames(Animal[] animals);
+    Map<String, LocalDate> findLeapYearNames(Animal[] animals);
 
     /**
      * найти всех животных,возраст которых старше N лет

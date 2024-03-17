@@ -67,11 +67,11 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
 
     public Map<String, List<Animal>> createAnimals(int n) {
         Map<String, List<Animal>> animalsMap = new HashMap<>();
-        List<Animal> animals = new ArrayList<>();
 
         for (int i = 0; i < n; i++) {
             int randomAnimal = (int) (Math.random() * 6);
             AbstractAnimal a = HelperService.switchAnimal(randomAnimal);
+            String type = a.getClass().getSimpleName();
 
             a.setName("Animals.Animal" + i);
             a.setBreed("Breed" + i);
@@ -79,16 +79,11 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
             a.setCost(Math.random() * 10000);
             a.setBirthDate(HelperService.generateRandomDate());
 
-            animals.add(a);
-
-        }
-
-        for (Animal animal : animals) {
-            String animalType = animal.getClass().getSimpleName();
-            if (!animalsMap.containsKey(animalType)) {
-                animalsMap.put(animalType, new ArrayList<>());
+            if (animalsMap.get(type) == null) {
+                animalsMap.put(type, new ArrayList<Animal>());
             }
-            animalsMap.get(animalType).add(animal);
+
+            animalsMap.get(type).add(a);
         }
 
         return animalsMap;
