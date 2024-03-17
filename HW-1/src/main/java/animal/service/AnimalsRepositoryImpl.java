@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class AnimalsRepositoryImpl implements AnimalsRepository {
     @Override
-    public Map<String, LocalDate> indLeapYearNames(Animal[] animals) {
+    public Map<String, LocalDate> findLeapYearNames(Animal[] animals) {
         if (animals == null) {
             throw new NullAnimalArrayException();
         }

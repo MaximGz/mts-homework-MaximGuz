@@ -37,12 +37,12 @@ public interface CreateAnimalService {
 
     default Map<String, List<Animal>> createAnimals() {
         Map<String, List<Animal>> animalsMap = new HashMap<>();
-        List<Animal> animals = new ArrayList<>();
         int count = 0;
 
         while (count < 10) {
             int randomAnimal = (int) (Math.random() * 6);; // Генерируем случайное число для определения типа животного
             AbstractAnimal a = HelperService.switchAnimal(randomAnimal);
+            String type = a.getClass().getSimpleName();
 
             a.setName("Animals.Animal" + count);
             a.setBreed("Breed" + count);
@@ -50,17 +50,13 @@ public interface CreateAnimalService {
             a.setCharacter("Character" + count);
             a.setBirthDate(HelperService.generateRandomDate());
 
-            animals.add(a);
+            if (animalsMap.get(type) == null) {
+                animalsMap.put(type, new ArrayList<Animal>());
+            }
+
+            animalsMap.get(type).add(a);
 
             count++;
-        }
-
-        for (Animal animal : animals) {
-            String animalType = animal.getClass().getSimpleName();
-            if (!animalsMap.containsKey(animalType)) {
-                animalsMap.put(animalType, new ArrayList<>());
-            }
-            animalsMap.get(animalType).add(animal);
         }
 
         return animalsMap;
