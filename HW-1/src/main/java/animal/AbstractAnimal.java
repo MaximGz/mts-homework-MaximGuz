@@ -28,6 +28,18 @@ public abstract class AbstractAnimal implements Animal {
      */
     protected LocalDate birthDate;
 
+    public AbstractAnimal() {
+    }
+
+    public AbstractAnimal(String name, String breed, Double cost, String character, LocalDate birthDate) {
+        this.name = name;
+        this.breed = breed;
+        this.cost = cost;
+        this.character = character;
+        this.birthDate = birthDate;
+    }
+
+
     public void setBreed(String breed) {
         this.breed = breed;
     }
@@ -84,7 +96,9 @@ public abstract class AbstractAnimal implements Animal {
      * @return - получаем дату рождения
      */
     @Override
-    public LocalDate getBirthDate() { return birthDate; }
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
 
     @Override
     public String toString() {
