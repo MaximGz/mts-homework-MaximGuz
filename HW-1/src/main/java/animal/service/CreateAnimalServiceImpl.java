@@ -2,14 +2,11 @@ package animal.service;
 
 import animal.AbstractAnimal;
 import animal.Animal;
-import custexceptions.InvalidAnimalBirthDateException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static animal.service.HelperService.switchAnimal;
 
 /**
  * Класс-сервис, наследуемый от CreateAnimalService
@@ -79,9 +76,7 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
             a.setCost(Math.random() * 10000);
             a.setBirthDate(HelperService.generateRandomDate());
 
-            if (animalsMap.get(type) == null) {
-                animalsMap.put(type, new ArrayList<Animal>());
-            }
+            animalsMap.computeIfAbsent(type, k -> new ArrayList<Animal>());
 
             animalsMap.get(type).add(a);
         }
