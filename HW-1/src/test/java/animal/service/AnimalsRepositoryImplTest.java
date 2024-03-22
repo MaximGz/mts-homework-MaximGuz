@@ -8,10 +8,10 @@ import animal.predator.Lion;
 import animal.predator.Shark;
 import animal.predator.Wolf;
 import custexceptions.EmptyAnimalArrayException;
-import custexceptions.NullAnimalArrayException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,7 +24,7 @@ class AnimalsRepositoryImplTest {
     AnimalsRepositoryImpl ari = new AnimalsRepositoryImpl();
 
     private Animal[] animals() {
-        Animal[] animals = {
+        Animal[] animalsArray = {
                 new Dog("Animal1", "Breed1", 150.0d, "Character1", LocalDate.of(2001, 1, 1)),
                 new Cat("Animal2", "Breed2", 1000.12d, "Character2", LocalDate.of(2001, 3, 7)),
                 new Cow("Animal3", "Breed3", 500.3d, "Character3", LocalDate.of(2002, 5, 13)),
@@ -36,13 +36,28 @@ class AnimalsRepositoryImplTest {
                 new Dog("Animal9", "Breed9", 470.111d, "Character9", LocalDate.of(2009, 6, 11)),
         };
 
+        return animalsArray;
+    }
+
+    private List<Animal> animalsList() {
+        List<Animal> animals = new ArrayList<>();
+        animals.add(new Dog("Animal1", "Breed1", 150.0d, "Character1", LocalDate.of(2001, 1, 1)));
+        animals.add(new Cat("Animal2", "Breed2", 1000.12d, "Character2", LocalDate.of(2001, 3, 7)));
+        animals.add(new Cow("Animal3", "Breed3", 500.3d, "Character3", LocalDate.of(2002, 5, 13)));
+        animals.add(new Lion("Animal4", "Breed4", 1.8d, "Character4", LocalDate.of(2004, 1, 20)));
+        animals.add(new Shark("Animal5", "Breed5", 600.0d, "Character5", LocalDate.of(2004, 9, 27)));
+        animals.add(new Wolf("Animal6", "Breed6", 89.0d, "Character6", LocalDate.of(2006, 11, 30)));
+        animals.add(new Dog("Animal7", "Breed7", 170.111d, "Character7", LocalDate.of(2007, 2, 3)));
+        animals.add(new Cat("Animal8", "Breed8", 1034.19d, "Character8", LocalDate.of(2008, 4, 4)));
+        animals.add(new Dog("Animal9", "Breed9", 470.111d, "Character9", LocalDate.of(2009, 6, 11)));
+
         return animals;
     }
 
     @DisplayName("Проверка метода findLeapYearNames на корректность")
     @Test
     void findLeapYearNamesTest() {
-        Map<String, LocalDate> map = ari.findLeapYearNames(animals());
+        Map<String, LocalDate> map = ari.findLeapYearNames(animalsList());
 
         assertEquals(3, map.size());
         assertEquals(LocalDate.of(2004, 1, 20), map.get("Lion Animal4"));
@@ -50,23 +65,19 @@ class AnimalsRepositoryImplTest {
         assertEquals(LocalDate.of(2008, 4, 4), map.get("Cat Animal8"));
     }
 
-    @DisplayName("Проверка метода findLeapYearNames на исключение NullAnimalArrayException, EmptyAnimalArrayException")
+    @DisplayName("Проверка метода findLeapYearNames на исключение EmptyAnimalArrayException")
     @Test
     void findLeapYearNamesExceptionTest() {
         assertThrows(EmptyAnimalArrayException.class,
                 () -> {
-                    ari.findLeapYearNames(new Animal[]{});
-                });
-        assertThrows(NullAnimalArrayException.class,
-                () -> {
-                    ari.findLeapYearNames(null);
+                    ari.findLeapYearNames(new ArrayList<Animal>());
                 });
     }
 
     @DisplayName("Проверка метода findDuplicate на корректность")
     @Test
     void findDuplicate() {
-        Map<String, List<Animal>> map = ari.findDuplicate(animals());
+        Map<String, List<Animal>> map = ari.findDuplicate(animalsList());
         assertEquals(6, map.size());
         assertEquals(3, map.get("Dog").size());
         assertEquals(2, map.get("Cat").size());
@@ -76,82 +87,74 @@ class AnimalsRepositoryImplTest {
         assertEquals(1, map.get("Wolf").size());
     }
 
-    @DisplayName("Проверка метода findDuplicate на исключение NullAnimalArrayException, EmptyAnimalArrayException")
+    @DisplayName("Проверка метода findDuplicate на исключение EmptyAnimalArrayException")
     @Test
     void findDuplicateExceptionTest() {
         assertThrows(EmptyAnimalArrayException.class,
                 () -> {
-                    ari.findLeapYearNames(new Animal[]{});
-                });
-        assertThrows(NullAnimalArrayException.class,
-                () -> {
-                    ari.findLeapYearNames(null);
+                    ari.findLeapYearNames(new ArrayList<>());
                 });
     }
 
     @DisplayName("Проверка метода findOlderAnimal в случае, если найдены животные старше N")
     @Test
     void findOlderThan20Animals() {
-        Animal[] animalArray = animals();
+        List<Animal> animalList = animalsList();
 
-        Map<Animal, Integer> map = ari.findOlderAnimal(animalArray, 20);
+        Map<Animal, Integer> map = ari.findOlderAnimal(animalList, 20);
 
         assertEquals(3, map.size());
-        assertTrue(map.containsKey(animalArray[0]));
-        assertEquals(23, map.get(animalArray[0]));
-        assertTrue(map.containsKey(animalArray[1]));
-        assertEquals(23, map.get(animalArray[1]));
-        assertTrue(map.containsKey(animalArray[2]));
-        assertEquals(21, map.get(animalArray[2]));
+        assertTrue(map.containsKey(animalList.get(0)));
+        assertEquals(23, map.get(animalList.get(0)));
+        assertTrue(map.containsKey(animalList.get(1)));
+        assertEquals(23, map.get(animalList.get(1)));
+        assertTrue(map.containsKey(animalList.get(2)));
+        assertEquals(21, map.get(animalList.get(2)));
 
-        assertFalse(map.containsKey(animalArray[3]));
-        assertFalse(map.containsKey(animalArray[4]));
-        assertFalse(map.containsKey(animalArray[5]));
-        assertFalse(map.containsKey(animalArray[6]));
-        assertFalse(map.containsKey(animalArray[7]));
-        assertFalse(map.containsKey(animalArray[8]));
+        assertFalse(map.containsKey(animalList.get(3)));
+        assertFalse(map.containsKey(animalList.get(4)));
+        assertFalse(map.containsKey(animalList.get(5)));
+        assertFalse(map.containsKey(animalList.get(6)));
+        assertFalse(map.containsKey(animalList.get(7)));
+        assertFalse(map.containsKey(animalList.get(8)));
 
     }
 
     @DisplayName("Проверка метода findOlderAnimal в случае, если НЕ найдены животные старше N")
     @Test
     void findOlderThan100Animals() {
-        Animal[] animalArray = animals();
+        List<Animal> animalList = animalsList();
 
-        Map<Animal, Integer> map = ari.findOlderAnimal(animalArray, 100);
+        Map<Animal, Integer> map = ari.findOlderAnimal(animalList, 100);
         assertEquals(2, map.size());
-        assertTrue(map.containsKey(animalArray[0]));
-        assertEquals(23, map.get(animalArray[0]));
-        assertTrue(map.containsKey(animalArray[1]));
-        assertEquals(23, map.get(animalArray[1]));
+        assertTrue(map.containsKey(animalList.get(0)));
+        assertEquals(23, map.get(animalList.get(0)));
+        assertTrue(map.containsKey(animalList.get(1)));
+        assertEquals(23, map.get(animalList.get(1)));
 
-        assertFalse(map.containsKey(animalArray[2]));
-        assertFalse(map.containsKey(animalArray[3]));
-        assertFalse(map.containsKey(animalArray[4]));
-        assertFalse(map.containsKey(animalArray[5]));
-        assertFalse(map.containsKey(animalArray[6]));
-        assertFalse(map.containsKey(animalArray[7]));
-        assertFalse(map.containsKey(animalArray[8]));
+        assertFalse(map.containsKey(animalList.get(2)));
+        assertFalse(map.containsKey(animalList.get(3)));
+        assertFalse(map.containsKey(animalList.get(4)));
+        assertFalse(map.containsKey(animalList.get(5)));
+        assertFalse(map.containsKey(animalList.get(6)));
+        assertFalse(map.containsKey(animalList.get(7)));
+        assertFalse(map.containsKey(animalList.get(8)));
     }
 
-    @DisplayName("Проверка метода findOlderThan на исключение NullAnimalArrayException, EmptyAnimalArrayException")
+    @DisplayName("Проверка метода findOlderThan на исключение EmptyAnimalArrayException")
     @Test
     void findOlderThanExceptionTest() {
         assertThrows(EmptyAnimalArrayException.class,
                 () -> {
-                    ari.findOlderAnimal(new Animal[]{}, 0);
-                });
-        assertThrows(NullAnimalArrayException.class,
-                () -> {
-                    ari.findOlderAnimal(null, 0);
+                    ari.findOlderAnimal(new ArrayList<Animal>(), 0);
                 });
     }
 
     @DisplayName("Проверка метода findAverageAge на корректность")
     @Test
     void findAverageAge() {
-        double avg = ari.findAverageAge(Arrays.asList(animals()));
-        assertEquals(avg, 18.78);
+        BigDecimal avg = ari.findAverageAge(Arrays.asList(animals()));
+        assertEquals(avg.doubleValue(), 18.78);
     }
 
     @DisplayName("Проверка метода findAverageAge на исключение EmptyAnimalArrayException")
@@ -159,20 +162,20 @@ class AnimalsRepositoryImplTest {
     void findAverageAgeExceptionTest() {
         assertThrows(EmptyAnimalArrayException.class,
                 () -> {
-                    double averageAge = ari.findAverageAge(new ArrayList<>());
+                    BigDecimal averageAge = ari.findAverageAge(new ArrayList<>());
                 });
     }
 
     @DisplayName("Проверка метода findOldAndExpensive на корректность")
     @Test
     void findOldAndExpensive() {
-        Animal[] animalArray = animals();
-        List<Animal> animalsList = ari.findOldAndExpensive(Arrays.asList(animalArray));
+        List<Animal> animalList = animalsList();
+        List<Animal> result = ari.findOldAndExpensive(animalList);
 
-        assertEquals(3, animalsList.size());
-        assertEquals(animalsList.get(0), animalArray[1]);
-        assertEquals(animalsList.get(1), animalArray[2]);
-        assertEquals(animalsList.get(2), animalArray[4]);
+        assertEquals(3, result.size());
+        assertEquals(result.get(0), animalList.get(1));
+        assertEquals(result.get(1), animalList.get(2));
+        assertEquals(result.get(2), animalList.get(4));
     }
 
     @DisplayName("Проверка метода findOldAndExpensive на исключение EmptyAnimalArrayException")
@@ -187,13 +190,13 @@ class AnimalsRepositoryImplTest {
     @DisplayName("Проверка метода findMinConstAnimals на корректность")
     @Test
     void findMinConstAnimals() {
-        Animal[] animalArray = animals();
-        List<Animal> animalsList = ari.findMinConstAnimals(Arrays.asList(animalArray));
+        List<Animal> animalsList = animalsList();
+        List<Animal> result = ari.findMinConstAnimals(animalsList);
 
-        assertEquals(3, animalsList.size());
-        assertEquals(animalsList.get(0), animalArray[5]);
-        assertEquals(animalsList.get(1), animalArray[3]);
-        assertEquals(animalsList.get(2), animalArray[0]);
+        assertEquals(3, result.size());
+        assertEquals(result.get(0), animalsList.get(5));
+        assertEquals(result.get(1), animalsList.get(3));
+        assertEquals(result.get(2), animalsList.get(0));
     }
 
     @DisplayName("Проверка метода findMinConstAnimals на исключение EmptyAnimalArrayException")

@@ -2,6 +2,7 @@ package animal.service;
 
 import animal.Animal;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +18,7 @@ public interface AnimalsRepository {
      * @param animals - массив животных
      * @return - мапа Map<String, LocalDate>
      */
-    Map<String, LocalDate> findLeapYearNames(Animal[] animals);
+    Map<String, LocalDate> findLeapYearNames(List<Animal> animals);
 
     /**
      * найти всех животных,возраст которых старше N лет
@@ -26,7 +27,7 @@ public interface AnimalsRepository {
      * @param n       - количество лет
      * @return - мапа мапа Map<Animal, Integer>
      */
-    Map<Animal, Integer> findOlderAnimal(Animal[] animals, int n);
+    Map<Animal, Integer> findOlderAnimal(List<Animal> animals, int n);
 
     /**
      * Метод выводит на экран дубликаты животных
@@ -34,7 +35,7 @@ public interface AnimalsRepository {
      * @param animals - массив животных
      * @return - мапа Map<String, Integer>
      */
-    Map<String, List<Animal>> findDuplicate(Animal[] animals);
+    Map<String, List<Animal>> findDuplicate(List<Animal> animals);
 
     /**
      * Cредний возраст всех животных
@@ -42,7 +43,7 @@ public interface AnimalsRepository {
      * @param animals - список животных
      * @return - возраст
      */
-    double findAverageAge(List<Animal> animals);
+    BigDecimal findAverageAge(List<Animal> animals);
 
     /**
      * Найти животных, возраст которых больше 5 лет и стоимость которых больше средней стоимости всех животных
