@@ -51,4 +51,7 @@ class ConcurrencyTasksTest {
                 Arguments.arguments(20, BigInteger.valueOf(2432902008176640000L), 16)
         );
     }
+
+    //TODO: Нет теста на простые числа
+
 }

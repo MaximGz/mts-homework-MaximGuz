@@ -1,7 +1,7 @@
 import java.util.Arrays;
 import java.util.concurrent.Callable;
 
-public class СreateSegment implements Callable {
+public class СreateSegment implements Callable<int[]> {
     private final int[] array;
     private final int start;
     private final int end;

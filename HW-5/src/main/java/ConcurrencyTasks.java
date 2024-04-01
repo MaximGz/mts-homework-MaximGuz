@@ -24,6 +24,7 @@ public class ConcurrencyTasks {
 
         executor.shutdown();
 
+        //TODO: НЕТ! так делать не надо. Может зависнуть навсегда. Есть прекрасный метод executor.awaitTermination
         while (!executor.isTerminated()) {
             //ждём пока отработают все потоки
         }
@@ -34,7 +35,7 @@ public class ConcurrencyTasks {
     // 4. Параллельное вычисление факториала
     public BigInteger factorialMethod(int n, int threadNums) throws ExecutionException, InterruptedException {
         int[] arr = new int[n];
-        BigInteger result = BigInteger.valueOf(1);
+        BigInteger result = BigInteger.valueOf(1);//TODO: BigInteger.ONE
         for (int i = 0; i < n; i++) {
             arr[i] = i + 1;
         }
@@ -53,13 +54,14 @@ public class ConcurrencyTasks {
 
         for (Future future : futures) {
             int[] value = (int[]) future.get();
-            BigInteger i = BigInteger.valueOf(1);
+            BigInteger i = BigInteger.valueOf(1); //TODO: BigInteger.ONE
             for (int v : value) {
-                i = i.multiply(BigInteger.valueOf(v));
+                i = i.multiply(BigInteger.valueOf(v)); //TODO: У тебя вся работа идет тут в одном потоке. Получается ты раздедил массив на части в многопоточном режиме, потом собрал все и умножаешь в одном потоке :D
             }
             result = result.multiply(i);
         }
         exec.shutdown();
+        //TODO: а тут ждём пока отработают все потоки? =) Ах да, их же нет))
         return result;
     }
 
@@ -85,7 +87,7 @@ public class ConcurrencyTasks {
             List<Integer> finalList = new ArrayList<Integer>();
             for (int v : initArr) {
                 if (checkIfPrime(v))
-                    finalList.add(v);
+                    finalList.add(v);//TODO: ТОЖЕ САМОЕ, вся работа идет тут в одном потоке. И по=хорошему написать бы так код, чтобы еще были по порядку числа, сейчас у тебя на выходе они вразнобой
             }
             resultList.addAll(finalList);
         }
