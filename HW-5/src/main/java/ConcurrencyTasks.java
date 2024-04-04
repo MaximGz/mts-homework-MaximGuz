@@ -34,7 +34,7 @@ public class ConcurrencyTasks {
     // 4. Параллельное вычисление факториала
     public BigInteger factorialMethod(int n, int threadNums) throws ExecutionException, InterruptedException {
         int[] arr = new int[n];
-        BigInteger result = BigInteger.valueOf(1);
+        BigInteger result = BigInteger.ONE;
         for (int i = 0; i < n; i++) {
             arr[i] = i + 1;
         }
@@ -48,16 +48,20 @@ public class ConcurrencyTasks {
             int startIndex = i * chunkSize;
             int endIndex = (i == threadNums - 1) ? n : startIndex + chunkSize;
             ;
-            futures[i] = exec.submit(new СreateSegment(arr, startIndex, endIndex));
+            futures[i] = exec.submit(() -> {
+                CreateSegment cs = new CreateSegment(arr, startIndex, endIndex);
+                int[] section = cs.call();
+                BigInteger b = BigInteger.ONE;
+                for (int val : section) {
+                    b = b.multiply(BigInteger.valueOf(val));
+                }
+                return b;
+            });
         }
 
         for (Future future : futures) {
-            int[] value = (int[]) future.get();
-            BigInteger i = BigInteger.valueOf(1);
-            for (int v : value) {
-                i = i.multiply(BigInteger.valueOf(v));
-            }
-            result = result.multiply(i);
+            BigInteger b = (BigInteger) future.get();
+            result = result.multiply(b);
         }
         exec.shutdown();
         return result;
@@ -76,18 +80,21 @@ public class ConcurrencyTasks {
         for (int i = 0; i < threadNums; i++) {
             int startIndex = i * chunkSize;
             int endIndex = (i == threadNums - 1) ? n : startIndex + chunkSize;
-            ;
-            futures[i] = exec.submit(new СreateSegment(arr, startIndex, endIndex));
+
+            futures[i] = exec.submit(() -> {
+                CreateSegment cs = new CreateSegment(arr, startIndex, endIndex);
+                List<Integer> primeList = new ArrayList<Integer>();
+                int[] section = cs.call();
+                for (int val : section) {
+                    if (checkIfPrime(val))
+                        primeList.add(val);
+                }
+                return primeList;
+            });
         }
 
         for (Future future : futures) {
-            int[] initArr = (int[]) future.get();
-            List<Integer> finalList = new ArrayList<Integer>();
-            for (int v : initArr) {
-                if (checkIfPrime(v))
-                    finalList.add(v);
-            }
-            resultList.addAll(finalList);
+            resultList.addAll((ArrayList<Integer>)future.get());
         }
         exec.shutdown();
         return resultList;
