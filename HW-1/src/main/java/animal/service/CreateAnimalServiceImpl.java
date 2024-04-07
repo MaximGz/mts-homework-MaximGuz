@@ -64,6 +64,7 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
 
     public Map<String, List<Animal>> createAnimals(int n) {
         Map<String, List<Animal>> animalsMap = new HashMap<>();
+        FileAnimalsService f = new FileAnimalsService();
 
         for (int i = 0; i < n; i++) {
             int randomAnimal = (int) (Math.random() * 6);
@@ -79,6 +80,7 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
             animalsMap.computeIfAbsent(type, k -> new ArrayList<Animal>());
 
             animalsMap.get(type).add(a);
+            f.logAnimals(a, i);
         }
 
         return animalsMap;

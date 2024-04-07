@@ -90,6 +90,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
 
     @Override
     public Map<Animal, Integer> findOlderAnimal(List<Animal> animals, int n) {
+        FileAnimalsService f = new FileAnimalsService();
         if (animals.isEmpty()) {
             throw new EmptyAnimalArrayException("На вход передан пустой список");
         }
@@ -109,6 +110,8 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
                             a -> maxAge.getAsInt()
                     ));
         }
+
+        f.writeAnimalsToJson(result);
 
         return result;
     }
