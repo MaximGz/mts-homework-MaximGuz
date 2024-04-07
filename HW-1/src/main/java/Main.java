@@ -41,7 +41,8 @@ public class Main {
         ResultReader rr = new ResultReader();
         AnimalsRepositoryImpl ari = new AnimalsRepositoryImpl();
 
-        rr.readAnimalsFromJson();
+        //ari.findOlderAnimal(animals, 20);
+        //rr.readAnimalsFromJson();
 
 
         /*System.out.println("\nWhile cycle:");
