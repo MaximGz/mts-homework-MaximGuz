@@ -1,5 +1,8 @@
 package animal;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.StdArraySerializers;
+
 import java.time.LocalDate;
 
 /**
@@ -26,4 +29,6 @@ public interface Animal {
      * Метод для получения даты рождения
      */
     LocalDate getBirthDate();
+
+    String getSecretInformation();
 }

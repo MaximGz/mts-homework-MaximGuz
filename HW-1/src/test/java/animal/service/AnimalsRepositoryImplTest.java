@@ -101,7 +101,12 @@ class AnimalsRepositoryImplTest {
     void findOlderThan20Animals() {
         List<Animal> animalList = animalsList();
 
+
         Map<Animal, Integer> map = ari.findOlderAnimal(animalList, 20);
+
+        for (Map.Entry<Animal, Integer> entry : map.entrySet()) {
+            System.out.println(entry.getKey() + "/" + entry.getValue());
+        }
 
         assertEquals(3, map.size());
         assertTrue(map.containsKey(animalList.get(0)));

@@ -1,12 +1,21 @@
 package animal;
 
+import animal.service.FileAnimalsService;
+import com.fasterxml.jackson.annotation.JsonValue;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
  * Родительский класс всех животных
  */
+@NoArgsConstructor
+@AllArgsConstructor
 public abstract class AbstractAnimal implements Animal {
+    FileAnimalsService f = new FileAnimalsService();
     /**
      * Порода
      */
@@ -27,9 +36,7 @@ public abstract class AbstractAnimal implements Animal {
      * Дата рождения животного
      */
     protected LocalDate birthDate;
-
-    public AbstractAnimal() {
-    }
+    protected String secretInformation;
 
     public AbstractAnimal(String name, String breed, Double cost, String character, LocalDate birthDate) {
         this.name = name;
@@ -37,6 +44,7 @@ public abstract class AbstractAnimal implements Animal {
         this.cost = cost;
         this.character = character;
         this.birthDate = birthDate;
+        this.secretInformation = f.getSecretCodeFromFile();
     }
 
 
@@ -59,6 +67,8 @@ public abstract class AbstractAnimal implements Animal {
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
+
+    public void setSecretInformation(String secretInformation) { this.secretInformation = secretInformation; }
 
     /**
      * @return - получаем значение породы
@@ -101,8 +111,14 @@ public abstract class AbstractAnimal implements Animal {
     }
 
     @Override
+    public String getSecretInformation() {
+        return secretInformation;
+    }
+
+    @Override
     public String toString() {
         return this.getClass().getSimpleName() + ": " + this.getName() + ", " + this.getBreed() + ", " +
-                this.getCharacter() + ", " + String.format("%.2f", this.getCost()) + ", " + DateTimeFormatter.ofPattern("dd-MM-yyyy").format(birthDate);
+                this.getCharacter() + ", " + String.format("%.2f", this.getCost()) + ", " +
+                DateTimeFormatter.ofPattern("dd-MM-yyyy").format(birthDate) + ", " + this.getSecretInformation();
     }
 }
