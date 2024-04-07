@@ -1,5 +1,6 @@
 package animal.service;
 
+import animal.AbstractAnimal;
 import animal.Animal;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -10,9 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public class FileAnimalsService {
 
@@ -52,11 +51,11 @@ public class FileAnimalsService {
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 
-//        for (Animal a : animals) {
-//            AbstractAnimal an = (AbstractAnimal) a;
-//            String secretInfo = an.getSecretInformation();
-//            an.setSecretInformation(Base64.getEncoder().encodeToString(secretInfo.getBytes()));
-//        }
+        for(Map.Entry<Animal, Integer> entry : animals.entrySet()) {
+            AbstractAnimal a = (AbstractAnimal) entry.getKey();
+            String code = a.getSecretInformation();
+            a.setSecretInformation(Base64.getEncoder().encodeToString(code.getBytes()));
+        }
 
         try {
             objectMapper.writeValue(path.toFile(), animals);
