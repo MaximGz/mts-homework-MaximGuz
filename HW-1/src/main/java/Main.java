@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Главный класс с вызовом метода main
@@ -34,16 +35,15 @@ public class Main {
         animals.add(new Wolf("Animal6", "Breed6", 89.0d, "Character6", LocalDate.of(2006, 11, 30)));
         animals.add(new Dog("Animal7", "Breed7", 170.111d, "Character7", LocalDate.of(2007, 2, 3)));
         animals.add(new Cat("Animal8", "Breed8", 1034.19d, "Character8", LocalDate.of(2008, 4, 4)));
-        animals.add(new Dog("Animal9", "Breed9", 470.111d, "Character9", LocalDate.of(2009, 6, 11)));*/
+        animals.add(new Dog("Animal9", "Breed9", 470.111d, "Character9", LocalDate.of(2009, 6, 11)));
 
         CreateAnimalServiceImpl createAnimalServiceImpl = new CreateAnimalServiceImpl();
         FileAnimalsService f = new FileAnimalsService();
         ResultReader rr = new ResultReader();
         AnimalsRepositoryImpl ari = new AnimalsRepositoryImpl();
 
-        //ari.findOlderAnimal(animals, 20);
-        //rr.readAnimalsFromJson();
-
+        ari.findOlderAnimal(animals, 20);
+        rr.readAnimalsFromJson();*/
 
         /*System.out.println("\nWhile cycle:");
         try {

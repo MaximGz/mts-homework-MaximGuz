@@ -14,4 +14,8 @@ public abstract class Pet extends AbstractAnimal {
     public Pet(String name, String breed, Double cost, String character, LocalDate birthDate) {
         super(name, breed, cost, character, birthDate);
     }
+
+    public Pet(String name, String breed, Double cost, String character, LocalDate birthDate, String secretInformation) {
+        super(name, breed, cost, character, birthDate, secretInformation);
+    }
 }

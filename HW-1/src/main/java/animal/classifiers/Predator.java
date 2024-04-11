@@ -14,4 +14,8 @@ public abstract class Predator extends AbstractAnimal {
     public Predator(String name, String breed, Double cost, String character, LocalDate birthDate) {
         super(name, breed, cost, character, birthDate);
     }
+
+    public Predator(String name, String breed, Double cost, String character, LocalDate birthDate, String secretInformation) {
+        super(name, breed, cost, character, birthDate, secretInformation);
+    }
 }
