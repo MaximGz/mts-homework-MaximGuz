@@ -1,5 +1,28 @@
-{
-  "Dog: Animal1, Breed1, Character1, 150,00, 01-01-2001, 0KHQtdC60YDQtdGC0L3Ri9C50JrQvtC0NQ==" : 23,
-  "Cow: Animal3, Breed3, Character3, 500,30, 13-05-2002, 0KHQtdC60YDQtdGC0L3Ri9C50JrQvtC0OQ==" : 21,
-  "Cat: Animal2, Breed2, Character2, 1000,12, 07-03-2001, 0KHQtdC60YDQtdGC0L3Ri9C50JrQvtC0Nw==" : 23
-}
+[ {
+  "class" : "Dog",
+  "name" : "Animal1",
+  "age" : 23,
+  "birthdate" : "2001-01-01",
+  "character" : "Character1",
+  "breed" : "Breed1",
+  "cost" : 150.0,
+  "secretInformation" : "0KHQtdC60YDQtdGC0L3Ri9C50JrQvtC0MQ=="
+}, {
+  "class" : "Cat",
+  "name" : "Animal2",
+  "age" : 23,
+  "birthdate" : "2001-03-07",
+  "character" : "Character2",
+  "breed" : "Breed2",
+  "cost" : 1000.12,
+  "secretInformation" : "0KHQtdC60YDQtdGC0L3Ri9C50JrQvtC0OQ=="
+}, {
+  "class" : "Cow",
+  "name" : "Animal3",
+  "age" : 21,
+  "birthdate" : "2002-05-13",
+  "character" : "Character3",
+  "breed" : "Breed3",
+  "cost" : 500.3,
+  "secretInformation" : "0KHQtdC60YDQtdGC0L3Ri9C50JrQvtC0Mg=="
+} ]

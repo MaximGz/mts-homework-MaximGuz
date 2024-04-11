@@ -1,19 +1,13 @@
 package animal;
 
 import animal.service.FileAnimalsService;
-import com.fasterxml.jackson.annotation.JsonValue;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
-import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
  * Родительский класс всех животных
  */
-@NoArgsConstructor
-@AllArgsConstructor
 public abstract class AbstractAnimal implements Animal {
     FileAnimalsService f = new FileAnimalsService();
     /**
@@ -38,6 +32,10 @@ public abstract class AbstractAnimal implements Animal {
     protected LocalDate birthDate;
     protected String secretInformation;
 
+    public AbstractAnimal() {
+
+    }
+
     public AbstractAnimal(String name, String breed, Double cost, String character, LocalDate birthDate) {
         this.name = name;
         this.breed = breed;
@@ -45,6 +43,15 @@ public abstract class AbstractAnimal implements Animal {
         this.character = character;
         this.birthDate = birthDate;
         this.secretInformation = f.getSecretCodeFromFile();
+    }
+
+    public AbstractAnimal(String name, String breed, Double cost, String character, LocalDate birthDate, String secretInformation) {
+        this.name = name;
+        this.breed = breed;
+        this.cost = cost;
+        this.character = character;
+        this.birthDate = birthDate;
+        this.secretInformation = secretInformation;
     }
 
 
@@ -68,7 +75,9 @@ public abstract class AbstractAnimal implements Animal {
         this.birthDate = birthDate;
     }
 
-    public void setSecretInformation(String secretInformation) { this.secretInformation = secretInformation; }
+    public void setSecretInformation(String secretInformation) {
+        this.secretInformation = secretInformation;
+    }
 
     /**
      * @return - получаем значение породы

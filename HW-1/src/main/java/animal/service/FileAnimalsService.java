@@ -1,9 +1,10 @@
 package animal.service;
 
-import animal.AbstractAnimal;
 import animal.Animal;
+import animal.serializer.AnimalCustomSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -11,7 +12,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 public class FileAnimalsService {
 
@@ -51,14 +54,13 @@ public class FileAnimalsService {
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 
-        for(Map.Entry<Animal, Integer> entry : animals.entrySet()) {
-            AbstractAnimal a = (AbstractAnimal) entry.getKey();
-            String code = a.getSecretInformation();
-            a.setSecretInformation(Base64.getEncoder().encodeToString(code.getBytes()));
-        }
+        SimpleModule module = new SimpleModule();
+        module.addSerializer(Animal.class, new AnimalCustomSerializer());
+
+        objectMapper.registerModule(module);
 
         try {
-            objectMapper.writeValue(path.toFile(), animals);
+            objectMapper.writeValue(path.toFile(), animals.keySet());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
