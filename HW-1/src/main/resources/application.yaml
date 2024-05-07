@@ -1,0 +1,13 @@
+animal:
+  cat:
+    names: Barsik;Murzik;Vitya;Matroskin
+  dog:
+    names: Sharik;Bobik;Vova;Barbos
+  cow:
+    names: Burenka;Manka;Murka;Zorka
+  shark:
+    names: Jaws;Nemo;Finley;Sharky
+  lion:
+    names: Leo;Simba;Nala;Mufasa
+  wolf:
+    names: Alpha;Luna;Shadow;Wolfie
