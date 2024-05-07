@@ -3,7 +3,6 @@ package org.starter.pet;
 import org.starter.classifiers.Pet;
 
 import java.time.LocalDate;
-import java.util.Random;
 
 /**
  * Класс для создания кота

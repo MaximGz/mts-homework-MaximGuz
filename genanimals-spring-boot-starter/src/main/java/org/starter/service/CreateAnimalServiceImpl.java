@@ -2,6 +2,7 @@ package org.starter.service;
 
 import org.starter.AbstractAnimal;
 import org.starter.Animal;
+import org.starter.factory.AnimalFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -61,10 +62,10 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
 //    public void createAnimalsfromInterface() throws InvalidAnimalBirthDateException {
 //        CreateAnimalService.super.createAnimals();
 //    }
-    public NamesListService randNames;
+    public AnimalFactory animalFactory;
 
-    public CreateAnimalServiceImpl(NamesListService randNames) {
-        this.randNames = randNames;
+    public CreateAnimalServiceImpl(AnimalFactory animalFactory) {
+        this.animalFactory = animalFactory;
     }
 
     public Map<String, List<Animal>> createAnimals(int n) {
@@ -73,55 +74,10 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
 
         for (int i = 0; i < n; i++) {
             int randomAnimal = (int) (Math.random() * 6);
-            AbstractAnimal a = HelperService.switchAnimal(randomAnimal);
+            AbstractAnimal a = animalFactory.switchAnimal(randomAnimal, i);
             String type = a.getClass().getSimpleName();
 
-            switch (type) {
-                case "Cat": {
-                    List<String> listNames = randNames.getCatNames();
-                    int r = (int) (Math.random() * listNames.size());
-                    a.setName(listNames.get(r));
-                    break;
-                }
-                case "Dog": {
-                    List<String> listNames = randNames.getDogNames();
-                    int r = (int) (Math.random() * listNames.size());
-                    a.setName(listNames.get(r));
-                    break;
-                }
-                case "Cow": {
-                    List<String> listNames = randNames.getCowNames();
-                    int r = (int) (Math.random() * listNames.size());
-                    a.setName(listNames.get(r));
-                    break;
-                }
-                case "Shark": {
-                    List<String> listNames = randNames.getSharkNames();
-                    int r = (int) (Math.random() * listNames.size());
-                    a.setName(listNames.get(r));
-                    break;
-                }
-                case "Lion": {
-                    List<String> listNames = randNames.getLionNames();
-                    int r = (int) (Math.random() * listNames.size());
-                    a.setName(listNames.get(r));
-                    break;
-                }
-                case "Wolf": {
-                    List<String> listNames = randNames.getWolfNames();
-                    int r = (int) (Math.random() * listNames.size());
-                    a.setName(listNames.get(r));
-                    break;
-                }
-                default: a.setName("Animal" + i);
-            }
-            a.setBreed("Breed" + i);
-            a.setCharacter("Character" + i);
-            a.setCost(Math.random() * 10000);
-            a.setBirthDate(HelperService.generateRandomDate());
-
             animalsMap.computeIfAbsent(type, k -> new ArrayList<Animal>());
-
             animalsMap.get(type).add(a);
             //f.logAnimals(a, i);
         }
@@ -129,7 +85,7 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
         return animalsMap;
     }
 
-    public Map<String, List<Animal>> createAnimalsfromInterface() {
-        return CreateAnimalService.super.createAnimals();
-    }
+//    public Map<String, List<Animal>> createAnimalsfromInterface() {
+//        return CreateAnimalService.super.createAnimals();
+//    }
 }

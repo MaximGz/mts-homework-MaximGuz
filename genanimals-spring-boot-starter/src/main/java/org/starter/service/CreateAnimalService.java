@@ -2,6 +2,7 @@ package org.starter.service;
 
 import org.starter.AbstractAnimal;
 import org.starter.Animal;
+import org.starter.factory.AnimalFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,30 +36,24 @@ public interface CreateAnimalService {
 //        }
 //    }
 
-    default Map<String, List<Animal>> createAnimals() {
-        Map<String, List<Animal>> animalsMap = new HashMap<>();
-        int count = 0;
-
-        while (count < 10) {
-            int randomAnimal = (int) (Math.random() * 6);; // Генерируем случайное число для определения типа животного
-            AbstractAnimal a = HelperService.switchAnimal(randomAnimal);
-            String type = a.getClass().getSimpleName();
-
-            a.setName("Animals.Animal" + count);
-            a.setBreed("Breed" + count);
-            a.setCost(Math.random() * 10000);
-            a.setCharacter("Character" + count);
-            a.setBirthDate(HelperService.generateRandomDate());
-
-            animalsMap.computeIfAbsent(type, k -> new ArrayList<Animal>());
-
-            animalsMap.get(type).add(a);
-
-            count++;
-        }
-
-        return animalsMap;
-    }
+//    default Map<String, List<Animal>> createAnimals() {
+//        Map<String, List<Animal>> animalsMap = new HashMap<>();
+//        int count = 0;
+//        AnimalFactory animalFactory = new AnimalFactory();
+//
+//        while (count < 10) {
+//            int randomAnimal = (int) (Math.random() * 6);; // Генерируем случайное число для определения типа животного
+//            AbstractAnimal a = animalFactory.switchAnimal(randomAnimal, count);
+//            String type = a.getClass().getSimpleName();
+//
+//            animalsMap.computeIfAbsent(type, k -> new ArrayList<Animal>());
+//            animalsMap.get(type).add(a);
+//
+//            count++;
+//        }
+//
+//        return animalsMap;
+//    }
 
     Map<String, List<Animal>> createAnimals(int n);
 }
