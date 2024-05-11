@@ -93,7 +93,7 @@ public class SpringBootStarterTest {
 
     @Test
     @DisplayName("Проверка, что в списке бинов есть namesListServiceTest из TestConfig")
-    public void test() {
+    public void existsNamesListServiceTest() {
         String[] beanNames = ctx.getBeanDefinitionNames();
         boolean exists = false;
         for (String beanName : beanNames) {
@@ -103,11 +103,4 @@ public class SpringBootStarterTest {
         }
         assertTrue(exists);
     }
-//    @Autowired
-//    FileAnimalsService f;
-//    @Test
-//    public void test1() {
-//        String s = f.getSecretCodeFromFile();
-//        System.out.println(s);
-//    }
 }

@@ -7,4 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 public class PathsPropertyService {
     @Value("${secret-store.path}")
     private String secretPath;
+
+    @Value("${log-data.path}")
+    private String logPath;
 }

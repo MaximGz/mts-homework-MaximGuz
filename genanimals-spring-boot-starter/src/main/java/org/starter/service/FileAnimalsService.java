@@ -22,7 +22,8 @@ public class FileAnimalsService {
     PathsPropertyService pathsPropertyService;
 
     public void logAnimals(Animal a, int counter) {
-        Path path = Paths.get("HW-1", "src", "main", "resources", "animals", "logData.txt");
+        String s = pathsPropertyService.getLogPath();
+        Path path = Paths.get(s);
         String data = counter + 1 + " " + a.getClass().getSimpleName() + " " + a.getName() + " " + a.getCost() + " " + a.getBirthDate() + "\n";
 
         try {

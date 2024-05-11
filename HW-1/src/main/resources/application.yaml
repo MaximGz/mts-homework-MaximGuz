@@ -14,4 +14,7 @@ animal:
 
 
 secret-store:
-  path: "D:\\GitMTS\\mts-homework-MaximGuz\\HW-1\\src\\main\\resources\\secretStore\\secretInformation.txt"
+  path: "src\\main\\resources\\secretStore\\secretInformation.txt"
+
+log-data:
+  path: "src\\main\\resources\\animals\\logData.txt"
