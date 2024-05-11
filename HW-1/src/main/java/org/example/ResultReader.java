@@ -1,11 +1,11 @@
-package org.example.service;
+package org.example;
 
-import org.starter.Animal;
-import org.example.serializer.AnimalCustomDeserializer;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import org.starter.Animal;
+import org.starter.serializer.AnimalCustomDeserializer;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -13,6 +13,12 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class ResultReader {
+
+    AnimalCustomDeserializer animalCustomDeserializer;
+
+    public ResultReader(AnimalCustomDeserializer animalCustomDeserializer) {
+        this.animalCustomDeserializer = animalCustomDeserializer;
+    }
 
     public void readAnimalsFromJson() {
         Path path = Paths.get("HW-1", "src", "main", "resources", "results", "findOlderAnimals.json");

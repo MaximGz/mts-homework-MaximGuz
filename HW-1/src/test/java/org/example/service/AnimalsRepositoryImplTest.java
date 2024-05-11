@@ -1,16 +1,21 @@
-package animal.service;
+package org.example.service;
 
+import org.example.AnimalsRepositoryImpl;
+import org.example.custexceptions.EmptyAnimalArrayException;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.starter.Animal;
+import org.starter.factory.AnimalFactory;
 import org.starter.pet.Cat;
 import org.starter.pet.Cow;
 import org.starter.pet.Dog;
 import org.starter.predator.Lion;
 import org.starter.predator.Shark;
 import org.starter.predator.Wolf;
-import org.example.custexceptions.EmptyAnimalArrayException;
-import org.example.service.AnimalsRepositoryImpl;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.starter.service.CreateAnimalService;
+import org.starter.service.CreateAnimalServiceImpl;
+import org.starter.service.FileAnimalsService;
+import org.starter.service.NamesListService;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -22,7 +27,11 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AnimalsRepositoryImplTest {
-    AnimalsRepositoryImpl ari = new AnimalsRepositoryImpl();
+    FileAnimalsService fileAnimalsService = new FileAnimalsService();
+    NamesListService namesListService = new NamesListService();
+    AnimalFactory animalFactory = new AnimalFactory(namesListService);
+    CreateAnimalService createAnimalService = new CreateAnimalServiceImpl(animalFactory, fileAnimalsService);
+    AnimalsRepositoryImpl ari = new AnimalsRepositoryImpl(fileAnimalsService, createAnimalService);
 
     private Animal[] animals() {
         Animal[] animalsArray = {

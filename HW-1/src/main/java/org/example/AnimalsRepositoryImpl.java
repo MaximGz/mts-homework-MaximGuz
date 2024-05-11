@@ -1,9 +1,12 @@
-package org.example.service;
+package org.example;
 
-import org.starter.Animal;
 import org.example.custexceptions.EmptyAnimalArrayException;
 import org.jetbrains.annotations.NotNull;
+import org.starter.Animal;
+import org.starter.service.CreateAnimalService;
+import org.starter.service.FileAnimalsService;
 
+import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
@@ -20,7 +23,16 @@ import static java.util.stream.Collectors.toList;
  * Класс-имплементация интерфейса AnimalsRepository
  */
 public class AnimalsRepositoryImpl implements AnimalsRepository {
-//    @Override
+    //private final FileAnimalsService fileAnimalsService;
+    private final CreateAnimalService createAnimalService;
+    private Map<String, List<Animal>> animalStorage;
+
+    public AnimalsRepositoryImpl(FileAnimalsService f, CreateAnimalService cr) {
+        //this.fileAnimalsService = f;
+        this.createAnimalService = cr;
+    }
+
+    //    @Override
 //    public Map<String, LocalDate> findLeapYearNames(Animal[] animals) {
 //        if (animals == null) {
 //            throw new NullAnimalArrayException();
@@ -36,7 +48,6 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
 //        }
 //        return map;
 //    }
-
 
     @Override
     public Map<String, LocalDate> findLeapYearNames(List<Animal> animals) {
@@ -90,7 +101,6 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
 
     @Override
     public Map<Animal, Integer> findOlderAnimal(List<Animal> animals, int n) {
-        FileAnimalsService f = new FileAnimalsService();
         if (animals.isEmpty()) {
             throw new EmptyAnimalArrayException("На вход передан пустой список");
         }
@@ -111,7 +121,7 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
                     ));
         }
 
-        f.writeAnimalsToJson(result);
+        //fileAnimalsService.writeAnimalsToJson(result);
 
         return result;
     }
@@ -196,5 +206,15 @@ public class AnimalsRepositoryImpl implements AnimalsRepository {
                 .collect(Collectors.toList());
 
         return list;
+    }
+
+    @PostConstruct
+    public void postAnimalsRepository() {
+        animalStorage = createAnimalService.createAnimals(10);
+    }
+
+    @Override
+    public Map<String, List<Animal>> getAnimalStorage() {
+        return animalStorage;
     }
 }

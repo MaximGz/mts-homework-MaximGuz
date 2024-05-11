@@ -12,6 +12,5 @@ animal:
   wolf:
     names: Alpha;Luna;Shadow;Wolfie
 
-
 secret-store:
-  path: "HW-1/src/main/resources/animals/secretInformation.txt"
+    path: "D:\\GitMTS\\mts-homework-MaximGuz\\genanimals-spring-boot-starter\\src\\main\\resources\\secretInformation.txt"

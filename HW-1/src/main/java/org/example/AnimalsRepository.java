@@ -1,4 +1,4 @@
-package org.example.service;
+package org.example;
 
 import org.starter.Animal;
 
@@ -11,6 +11,8 @@ import java.util.Map;
  * Интерфейс AnimalRepository
  */
 public interface AnimalsRepository {
+
+    public Map<String, List<Animal>> getAnimalStorage();
 
     /**
      * найти всех животных, которые родились в високосный год

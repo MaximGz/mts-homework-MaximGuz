@@ -1,11 +1,7 @@
 package org.starter.service;
 
-import org.starter.AbstractAnimal;
 import org.starter.Animal;
-import org.starter.factory.AnimalFactory;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -54,6 +50,8 @@ public interface CreateAnimalService {
 //
 //        return animalsMap;
 //    }
+
+    Map<String, List<Animal>> createAnimals();
 
     Map<String, List<Animal>> createAnimals(int n);
 }

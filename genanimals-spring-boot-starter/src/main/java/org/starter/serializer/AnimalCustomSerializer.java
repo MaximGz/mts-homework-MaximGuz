@@ -1,9 +1,9 @@
-package org.example.serializer;
+package org.starter.serializer;
 
-import org.starter.Animal;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+import org.starter.Animal;
 
 import java.io.IOException;
 import java.time.LocalDate;
