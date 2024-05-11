@@ -75,7 +75,7 @@ public class SpringBootMainTest {
         assertEquals(countAnimalsWithParams, 27);
     }
 
-    @DisplayName("Проверка полученных имен из application-test")
+    @DisplayName("Проверка полученных имен из application")
     @Test
     public void positiveCheckNamesListService() {
         assertEquals(namesListService.getCatNames().size(), 4);

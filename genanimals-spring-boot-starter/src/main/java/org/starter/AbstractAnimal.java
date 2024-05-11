@@ -11,7 +11,6 @@ import java.time.format.DateTimeFormatter;
  */
 @Data
 public abstract class AbstractAnimal implements Animal {
-    FileAnimalsService f = new FileAnimalsService();
     /**
      * Порода
      */

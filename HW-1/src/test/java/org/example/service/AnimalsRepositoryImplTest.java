@@ -28,8 +28,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class AnimalsRepositoryImplTest {
     FileAnimalsService fileAnimalsService = new FileAnimalsService();
-    NamesListService namesListService = new NamesListService();
-    AnimalFactory animalFactory = new AnimalFactory(namesListService);
+    AnimalFactory animalFactory = new AnimalFactory();
     CreateAnimalService createAnimalService = new CreateAnimalServiceImpl(animalFactory, fileAnimalsService);
     AnimalsRepositoryImpl ari = new AnimalsRepositoryImpl(fileAnimalsService, createAnimalService);
 

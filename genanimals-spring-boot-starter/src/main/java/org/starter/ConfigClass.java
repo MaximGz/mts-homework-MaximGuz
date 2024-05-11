@@ -22,7 +22,7 @@ public class ConfigClass {
 
     @Bean
     public AnimalFactory animalFactory() {
-        return new AnimalFactory(namesListService());
+        return new AnimalFactory();
     }
 
     @Bean
