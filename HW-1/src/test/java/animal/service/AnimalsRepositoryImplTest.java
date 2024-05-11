@@ -1,13 +1,14 @@
 package animal.service;
 
-import animal.Animal;
-import animal.pet.Cat;
-import animal.pet.Cow;
-import animal.pet.Dog;
-import animal.predator.Lion;
-import animal.predator.Shark;
-import animal.predator.Wolf;
-import custexceptions.EmptyAnimalArrayException;
+import org.starter.Animal;
+import org.starter.pet.Cat;
+import org.starter.pet.Cow;
+import org.starter.pet.Dog;
+import org.starter.predator.Lion;
+import org.starter.predator.Shark;
+import org.starter.predator.Wolf;
+import org.example.custexceptions.EmptyAnimalArrayException;
+import org.example.service.AnimalsRepositoryImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

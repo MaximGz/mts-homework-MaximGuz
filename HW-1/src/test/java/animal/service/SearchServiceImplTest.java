@@ -1,15 +1,16 @@
 package animal.service;
 
-import animal.AbstractAnimal;
-import animal.Animal;
-import animal.pet.Cat;
-import animal.pet.Cow;
-import animal.pet.Dog;
-import animal.predator.Lion;
-import animal.predator.Shark;
-import animal.predator.Wolf;
-import custexceptions.InvalidAnimalBirthDateException;
-import custexceptions.InvalidAnimalException;
+import org.starter.AbstractAnimal;
+import org.starter.Animal;
+import org.starter.pet.Cat;
+import org.starter.pet.Cow;
+import org.starter.pet.Dog;
+import org.starter.predator.Lion;
+import org.starter.predator.Shark;
+import org.starter.predator.Wolf;
+import org.example.custexceptions.InvalidAnimalBirthDateException;
+import org.example.custexceptions.InvalidAnimalException;
+import org.example.service.SearchServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
