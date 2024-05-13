@@ -4,6 +4,9 @@ import org.example.AnimalsRepositoryImpl;
 import org.example.custexceptions.EmptyAnimalArrayException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.starter.Animal;
 import org.starter.factory.AnimalFactory;
 import org.starter.pet.Cat;
@@ -19,6 +22,7 @@ import org.starter.service.NamesListService;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,11 +30,13 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@SpringBootTest
+@ActiveProfiles("test")
 class AnimalsRepositoryImplTest {
-    FileAnimalsService fileAnimalsService = new FileAnimalsService();
-    AnimalFactory animalFactory = new AnimalFactory();
-    CreateAnimalService createAnimalService = new CreateAnimalServiceImpl(animalFactory, fileAnimalsService);
-    AnimalsRepositoryImpl ari = new AnimalsRepositoryImpl(fileAnimalsService, createAnimalService);
+    @Autowired
+    CreateAnimalService createAnimalService;
+    @Autowired
+    AnimalsRepositoryImpl ari;
 
     private Animal[] animals() {
         Animal[] animalsArray = {
@@ -110,7 +116,6 @@ class AnimalsRepositoryImplTest {
     void findOlderThan20Animals() {
         List<Animal> animalList = animalsList();
 
-
         Map<Animal, Integer> map = ari.findOlderAnimal(animalList, 20);
 
         for (Map.Entry<Animal, Integer> entry : map.entrySet()) {
@@ -119,11 +124,11 @@ class AnimalsRepositoryImplTest {
 
         assertEquals(3, map.size());
         assertTrue(map.containsKey(animalList.get(0)));
-        assertEquals(23, map.get(animalList.get(0)));
+        assertEquals(Period.between(LocalDate.of(2001, 1, 1), LocalDate.now()).getYears(), map.get(animalList.get(0)));
         assertTrue(map.containsKey(animalList.get(1)));
-        assertEquals(23, map.get(animalList.get(1)));
+        assertEquals(Period.between(LocalDate.of(2001, 3, 7), LocalDate.now()).getYears(), map.get(animalList.get(1)));
         assertTrue(map.containsKey(animalList.get(2)));
-        assertEquals(21, map.get(animalList.get(2)));
+        assertEquals(Period.between(LocalDate.of(2002, 5, 13), LocalDate.now()).getYears(), map.get(animalList.get(2)));
 
         assertFalse(map.containsKey(animalList.get(3)));
         assertFalse(map.containsKey(animalList.get(4)));
@@ -142,9 +147,9 @@ class AnimalsRepositoryImplTest {
         Map<Animal, Integer> map = ari.findOlderAnimal(animalList, 100);
         assertEquals(2, map.size());
         assertTrue(map.containsKey(animalList.get(0)));
-        assertEquals(23, map.get(animalList.get(0)));
+        assertEquals(Period.between(LocalDate.of(2001, 1, 1), LocalDate.now()).getYears(), map.get(animalList.get(0)));
         assertTrue(map.containsKey(animalList.get(1)));
-        assertEquals(23, map.get(animalList.get(1)));
+        assertEquals(Period.between(LocalDate.of(2001, 3, 7), LocalDate.now()).getYears(), map.get(animalList.get(1)));
 
         assertFalse(map.containsKey(animalList.get(2)));
         assertFalse(map.containsKey(animalList.get(3)));
@@ -168,7 +173,7 @@ class AnimalsRepositoryImplTest {
     @Test
     void findAverageAge() {
         BigDecimal avg = ari.findAverageAge(Arrays.asList(animals()));
-        assertEquals(avg.doubleValue(), 18.78);
+        assertEquals(avg.doubleValue(), 19);
     }
 
     @DisplayName("Проверка метода findAverageAge на исключение EmptyAnimalArrayException")

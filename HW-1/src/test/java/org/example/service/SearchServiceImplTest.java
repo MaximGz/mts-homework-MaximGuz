@@ -9,6 +9,9 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.starter.AbstractAnimal;
 import org.starter.Animal;
 import org.starter.pet.Cat;
@@ -29,8 +32,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 /**
  * Класс для тестирования
  */
+@SpringBootTest
+@ActiveProfiles("test")
 class SearchServiceImplTest {
-    SearchServiceImpl ssi = new SearchServiceImpl();
+    @Autowired
+    SearchServiceImpl ssi;
     /**
      * Проверка на корректность вискосного года
      *

@@ -14,7 +14,7 @@ animal:
 
 
 secret-store:
-  path: "HW-1\\src\\main\\resources\\secretStore\\secretInformation.txt"
+  path: "src\\test\\resources\\secretInformation.txt"
 
 log-data:
-  path: "HW-1\\src\\main\\resources\\log\\logData.txt"
+  path: "src\\test\\resources\\logData.txt"

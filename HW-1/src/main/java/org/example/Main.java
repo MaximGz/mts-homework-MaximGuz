@@ -6,14 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.starter.Animal;
-import org.starter.serializer.AnimalCustomDeserializer;
-import org.starter.serializer.AnimalCustomSerializer;
-import org.starter.service.CreateAnimalService;
-import org.starter.service.FileAnimalsService;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
@@ -48,34 +41,5 @@ public class Main {
 //                System.out.println(s);
 //            }
         };
-    }
-
-    private final CreateAnimalService createAnimalService;
-    private final FileAnimalsService fileAnimalsService;
-    private final AnimalCustomDeserializer animalCustomDeserializer;
-    private final AnimalCustomSerializer animalCustomSerializer;
-
-    public Main(CreateAnimalService createAnimalService, FileAnimalsService fileAnimalsService,
-                       AnimalCustomDeserializer animalCustomDeserializer, AnimalCustomSerializer animalCustomSerializer) {
-        this.createAnimalService = createAnimalService;
-        this.fileAnimalsService = fileAnimalsService;
-        this.animalCustomDeserializer = animalCustomDeserializer;
-        this.animalCustomSerializer = animalCustomSerializer;
-    }
-
-    @Bean
-    public AnimalsRepository animalsRepository() {
-        return new AnimalsRepositoryImpl(fileAnimalsService, createAnimalService);
-    }
-
-    @Bean
-    public SearchService searchService() {
-        return new SearchServiceImpl();
-    }
-
-
-    @Bean
-    public ResultReader resultReader() {
-        return new ResultReader(animalCustomDeserializer);
     }
 }
