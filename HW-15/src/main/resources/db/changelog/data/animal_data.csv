@@ -1,0 +1,11 @@
+name,breed,character,cost,birth_date,type_id
+Murzik,Siamese,Affectionate,15000,'2023-03-08',2
+Rex,German Shepherd,Loyal,25000,'2022-06-12',1
+Buddy,Golden Retriever,Playful,20000,'2021-10-19',4
+Charlie,LionKing,Friendly,18000,'2020-12-25',6
+Sharky,Pug,Funny,12000,'2019-04-15',5
+Fifi,Cow,Elegant,16000,'2018-07-22',3
+Chico,Chihuahua,Tiny,10000,'2017-11-09',1
+Wolf,Husky,Strong,22000,'2016-02-16',4
+Akira,Akita,Independent,24000,'2015-05-23',4
+Caesar,Rottweiler,Protector,26000,'2014-09-10',1
