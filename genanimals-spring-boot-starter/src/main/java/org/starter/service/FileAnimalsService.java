@@ -1,10 +1,11 @@
-package org.example.service;
+package org.starter.service;
 
-import org.starter.Animal;
-import org.example.serializer.AnimalCustomSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.starter.Animal;
+import org.starter.serializer.AnimalCustomSerializer;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -17,9 +18,12 @@ import java.util.Map;
 import java.util.Random;
 
 public class FileAnimalsService {
+    @Autowired
+    PathsPropertyService pathsPropertyService;
 
     public void logAnimals(Animal a, int counter) {
-        Path path = Paths.get("HW-1", "src", "main", "resources", "animals", "logData.txt");
+        String s = pathsPropertyService.getLogPath();
+        Path path = Paths.get(s);
         String data = counter + 1 + " " + a.getClass().getSimpleName() + " " + a.getName() + " " + a.getCost() + " " + a.getBirthDate() + "\n";
 
         try {
@@ -34,7 +38,8 @@ public class FileAnimalsService {
     }
 
     public String getSecretCodeFromFile() {
-        Path path = Paths.get("HW-1", "src", "main", "resources", "secretStore", "secretInformation.txt");
+        String s = pathsPropertyService.getSecretPath();
+        Path path = Paths.get(s);
 
         List<String> stringsList = null;
         try {

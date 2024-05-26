@@ -1,5 +1,17 @@
-package animal.service;
+package org.example.service;
 
+import org.example.SearchServiceImpl;
+import org.example.custexceptions.InvalidAnimalBirthDateException;
+import org.example.custexceptions.InvalidAnimalException;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.NullSource;
+import org.junit.jupiter.params.provider.ValueSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.starter.AbstractAnimal;
 import org.starter.Animal;
 import org.starter.pet.Cat;
@@ -8,15 +20,6 @@ import org.starter.pet.Dog;
 import org.starter.predator.Lion;
 import org.starter.predator.Shark;
 import org.starter.predator.Wolf;
-import org.example.custexceptions.InvalidAnimalBirthDateException;
-import org.example.custexceptions.InvalidAnimalException;
-import org.example.service.SearchServiceImpl;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.NullSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -29,8 +32,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 /**
  * Класс для тестирования
  */
+@SpringBootTest
+@ActiveProfiles("test")
 class SearchServiceImplTest {
-    SearchServiceImpl ssi = new SearchServiceImpl();
+    @Autowired
+    SearchServiceImpl ssi;
     /**
      * Проверка на корректность вискосного года
      *

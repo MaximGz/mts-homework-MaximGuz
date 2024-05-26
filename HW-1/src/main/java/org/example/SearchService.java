@@ -1,7 +1,7 @@
-package org.example.service;
+package org.example;
 
-import org.starter.Animal;
 import org.example.custexceptions.InvalidAnimalBirthDateException;
+import org.starter.Animal;
 
 /**
  * Интерфейс-сервис для поиска

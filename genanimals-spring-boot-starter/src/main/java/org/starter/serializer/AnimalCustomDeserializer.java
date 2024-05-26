@@ -1,5 +1,10 @@
-package org.example.serializer;
+package org.starter.serializer;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.JsonNode;
 import org.starter.Animal;
 import org.starter.pet.Cat;
 import org.starter.pet.Cow;
@@ -7,11 +12,6 @@ import org.starter.pet.Dog;
 import org.starter.predator.Lion;
 import org.starter.predator.Shark;
 import org.starter.predator.Wolf;
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.JsonNode;
 
 import java.io.IOException;
 import java.time.LocalDate;

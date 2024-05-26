@@ -1,6 +1,7 @@
 package org.starter;
 
 import lombok.Data;
+import org.starter.service.FileAnimalsService;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -10,7 +11,6 @@ import java.time.format.DateTimeFormatter;
  */
 @Data
 public abstract class AbstractAnimal implements Animal {
-    //FileAnimalsService f = new FileAnimalsService();
     /**
      * Порода
      */
