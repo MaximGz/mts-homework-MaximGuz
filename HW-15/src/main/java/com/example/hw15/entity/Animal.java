@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Table(name = "animal")
 public class Animal {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "animal_id_seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String breed;
