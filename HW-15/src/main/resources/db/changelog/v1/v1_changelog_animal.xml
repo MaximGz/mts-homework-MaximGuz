@@ -1,0 +1,40 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="create-animal-table" author="MaximGuz" >
+        <createTable tableName="animal">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="breed" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cost" type="numeric(38, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="character" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="birth_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addUniqueConstraint tableName="animal" columnNames="name"/>
+        <addForeignKeyConstraint baseTableName="animal" baseColumnNames="type_id"
+                                 referencedTableName="animal_type" referencedColumnNames="id"
+                                 constraintName="fk_animal_animal_type"/>
+    </changeSet>
+
+    <changeSet id="data-animal" author="MaximGuz">
+        <loadData tableName="animal" file="db/changelog/data/animal_data.csv"/>
+    </changeSet>
+
+</databaseChangeLog>
