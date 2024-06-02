@@ -33,10 +33,10 @@ public class Hw15Application {
     public CommandLineRunner commandLineRunner(ApplicationContext ctx, AnimalTypeRepository animalTypeRepository, AnimalRepository animalRepository, AnimalService animalService) {
         return args -> {
 
-            Map<String, LocalDate> leapYearAnimals = animalService.findLeapYearNames();
-            for(String y : leapYearAnimals.keySet()) {
-                System.out.println(y + ": " + leapYearAnimals.get(y));
-            }
+//            Map<String, LocalDate> leapYearAnimals = animalService.findLeapYearNames();
+//            for(String y : leapYearAnimals.keySet()) {
+//                System.out.println(y + ": " + leapYearAnimals.get(y));
+//            }
             List<Animal> olderThanAnimalList = animalRepository.findAllAnimalsOlderThan(5);
             olderThanAnimalList.forEach(System.out::println);
 
@@ -53,14 +53,14 @@ public class Hw15Application {
                 System.out.println(y + ": " + ab1.get(y));
             }
 
-            animalRepository.deleteById(2L);
-
-            Animal a1 = new Animal("Doggy1", "Breed", 12.3, "Character",
-                    LocalDate.of(2023,8,31), animalTypeRepository.findByType("Dog"));
-            animalRepository.save(a1);
-            Animal a2 = new Animal("Doggy2", "Breed", 12.3, "Character",
-                    LocalDate.of(2023,8,31), animalTypeRepository.findByType("Dog"));
-            animalRepository.save(a2);
+//            animalRepository.deleteById(2L);
+//
+//            Animal a1 = new Animal("Doggy1", "Breed", 12.3, "Character",
+//                    LocalDate.of(2023,8,31), animalTypeRepository.findByType("Dog"));
+//            animalRepository.save(a1);
+//            Animal a2 = new Animal("Doggy2", "Breed", 12.3, "Character",
+//                    LocalDate.of(2023,8,31), animalTypeRepository.findByType("Dog"));
+//            animalRepository.save(a2);
         };
     }
 

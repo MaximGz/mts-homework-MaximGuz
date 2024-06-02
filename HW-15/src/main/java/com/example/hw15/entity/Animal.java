@@ -4,13 +4,15 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
 @Data
 @NoArgsConstructor
 @Table(name = "animal")
-public class Animal {
+public class Animal{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

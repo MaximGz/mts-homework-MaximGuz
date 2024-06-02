@@ -1,0 +1,17 @@
+type Animal {
+    id: ID!
+    name: String!
+    breed: String!
+    cost: Float!
+    character: String!
+    birthDate: String!
+    type: AnimalType!
+}
+type AnimalType {
+    id: ID!
+    type: String!
+}
+type Query {
+    animals(count: Int):[Animal]
+    animal(id: Int):Animal
+}

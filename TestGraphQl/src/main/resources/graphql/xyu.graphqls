@@ -1,0 +1,12 @@
+type Vehicle {
+	id: ID!,
+	type: String,
+	modelCode: String,
+	brandName: String,
+	launchDate: String
+}
+
+type Query1 {
+	vehicles(count: Int):[Vehicle]
+	vehicle(id: ID):Vehicle
+}

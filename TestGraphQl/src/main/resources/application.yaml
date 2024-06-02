@@ -4,7 +4,7 @@ spring:
       mode: always
       schema-locations: ""
   application:
-    name: HW-15
+    name: TestGraphQl
   datasource:
     url: jdbc:postgresql://localhost:5432/animals
     username: postgres
@@ -12,8 +12,8 @@ spring:
     hikari:
       connection-timeout: 20000
       maximum-pool-size: 5
-      schema: animals
-      connection-init-sql: CREATE SCHEMA if not exists "animals";
+      schema: graphqltest
+      connection-init-sql: CREATE SCHEMA if not exists "graphqltest";
   jpa:
     show-sql: true
     hibernate:
@@ -22,12 +22,8 @@ spring:
       hibernate:
         format_sql: true
         show_sql: true
-  liquibase:
-    enabled: true
-    change-log: db/changelog/db.changelog-master.xml
-    default-schema: animals
+        dialect: org.hibernate.dialect.PostgreSQLDialect
   graphql:
     graphiql:
       enabled: true
       path: /graphiql
-

@@ -66,16 +66,20 @@ public class AnimalService {
         return result;
     }
 
-    public Map<String, LocalDate> findLeapYearNames() {
-        List<Animal> animals = animalRepository.findLeapYearNames();
-        if (animals.isEmpty()) {
-            throw new EmptyAnimalArrayException("На вход передан пустой список");
-        }
+//    public Map<String, LocalDate> findLeapYearNames() {
+//        List<Animal> animals = animalRepository.findLeapYearNames();
+//        if (animals.isEmpty()) {
+//            throw new EmptyAnimalArrayException("На вход передан пустой список");
+//        }
+//
+//        Map<String, LocalDate> map = animals.stream()
+//                .filter(a -> a.getBirthDate().isLeapYear())
+//                .collect(Collectors.toMap(a -> a.getType().getType() + " " + a.getName(), Animal::getBirthDate));
+//
+//        return map;
+//    }
 
-        Map<String, LocalDate> map = animals.stream()
-                .filter(a -> a.getBirthDate().isLeapYear())
-                .collect(Collectors.toMap(a -> a.getType().getType() + " " + a.getName(), Animal::getBirthDate));
-
-        return map;
+    public List<Animal> getAllAnimals(final int count) {
+        return this.animalRepository.findAll().stream().limit(count).collect(Collectors.toList());
     }
 }
