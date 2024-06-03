@@ -25,8 +25,8 @@ public class GlobalControllerAdvice {
     }
 
     //Задание 9: Работа с @ResponseStatus
-    @ExceptionHandler(CustomException.class)
-    public ResponseEntity<String> handleCustomException(CustomException ex) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Emmm...Page not found");
-    }
+//    @ExceptionHandler(CustomException.class)
+//    public ResponseEntity<String> handleCustomException(CustomException ex) {
+//        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Emmm...Page not found");
+//    }
 }
