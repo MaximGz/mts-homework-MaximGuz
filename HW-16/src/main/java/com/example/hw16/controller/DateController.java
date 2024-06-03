@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class DateController {
 
     @GetMapping("/date/{date}")
-    public ResponseEntity<String> getDate(@PathVariable @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}", message = "Not valid") String date) {
+    public ResponseEntity<String> getDate(@PathVariable String date) {
+        if (!date.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            return ResponseEntity.badRequest().body("Invalid date. Format: yyyy-MM-dd");
+        }
         return ResponseEntity.ok("Valid date: " + date);
     }
 

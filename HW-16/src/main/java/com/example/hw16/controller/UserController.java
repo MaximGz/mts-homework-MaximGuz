@@ -2,6 +2,7 @@ package com.example.hw16.controller;
 
 import com.example.hw16.dao.User;
 import com.example.hw16.exception.CustomException;
+import com.example.hw16.exception.UserNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,8 @@ public class UserController {
     public String getUserById(@PathVariable Long id) {
         // Предположим, у нас есть условие, при котором пользователя с определенным id не существует
         if (id == 1) {
-            throw new IllegalArgumentException("User not found");
+            throw new UserNotFoundException("User not found");
+            //throw new IllegalArgumentException("User not found");
         }
         return "User found";
     }
