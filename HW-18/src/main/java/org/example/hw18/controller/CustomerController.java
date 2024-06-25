@@ -15,12 +15,15 @@ public class CustomerController {
     private CustomerService customerService;
 
     @GetMapping("/v1/all")
+    @ResponseBody
     @PreAuthorize("hasAuthority('ADMIN')")
     public List<Customer> allCustomers() {
         return customerService.getCustomerList();
     }
 
     @GetMapping("/v1/{id}")
+    @ResponseBody
+    @PreAuthorize("hasAuthority('USER')")
     public Customer getCustomerById(@PathVariable int id) {
         return customerService.getCustomerById(id);
     }
@@ -39,10 +42,5 @@ public class CustomerController {
     @GetMapping("/login")
     public String login() {
         return "login";
-    }
-
-    @GetMapping("/newlogin")
-    public String newlogin() {
-        return "newlogin";
     }
 }

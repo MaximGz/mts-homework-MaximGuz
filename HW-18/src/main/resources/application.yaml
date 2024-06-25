@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: HW-18
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    enabled: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/db_security
+    username: postgres
+    password: 12345
+    hikari:
+      connection-timeout: 20000
+      maximum-pool-size: 5
+      schema: public
+      #connection-init-sql: truncate table db_security.users CASCADE;
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+  liquibase:
+    enabled: false
+    change-log: db/changelog/db.changelog-master.xml
+    default-schema: db_security
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.springframework.web: DEBUG
