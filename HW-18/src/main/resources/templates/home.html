@@ -3,11 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #555;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        a {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        a:hover {
+            background-color: #3e8e41;
+        }
+    </style>
 </head>
 <body>
 <h1>Home Page</h1>
 <p>Welcome to the home page!</p>
-<a href="/v1/all">all customers</a>
-<a href="/v1/">указатель ссылки</a>
+
+<div style="display: flex;">
+    <a href="/v1/all">All Customers</a>
+    <a href="/v1/">Link Index</a>
+    <a href="/logout">Logout</a>
+</div>
 </body>
 </html>

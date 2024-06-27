@@ -32,12 +32,22 @@ public class SecurityConfig {
         UserDetails user = User.builder().username("user").password(passwordEncoder.encode("user123")).roles("USER").build();
         UserDetails max = User.builder().username("max").password(passwordEncoder.encode("maxim")).roles("ADMIN", "USER").build();
         JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+
+        jdbcUserDetailsManager.setUsersByUsernameQuery("SELECT username, password, enabled FROM db_security.users WHERE username = ?");
+        jdbcUserDetailsManager.setAuthoritiesByUsernameQuery("SELECT username, authority FROM db_security.authorities WHERE username = ?");
+        jdbcUserDetailsManager.setCreateUserSql("INSERT INTO db_security.users (username, password, enabled) values (?,?,?)");
+        jdbcUserDetailsManager.setCreateAuthoritySql("INSERT INTO db_security.authorities (username, authority) values (?,?)");
+        jdbcUserDetailsManager.setDeleteUserAuthoritiesSql("DELETE FROM db_security.authorities WHERE username = ?");
+        jdbcUserDetailsManager.setDeleteUserSql("DELETE FROM db_security.users WHERE username = ?");
+        jdbcUserDetailsManager.setUpdateUserSql("UPDATE db_security.users SET password = ?, enabled = ? WHERE username = ?");
+        jdbcUserDetailsManager.setChangePasswordSql("UPDATE db_security.users SET password = ? WHERE username = ?");
         jdbcUserDetailsManager.createUser(admin);
         jdbcUserDetailsManager.createUser(user);
         jdbcUserDetailsManager.createUser(max);
         return jdbcUserDetailsManager;
     }
 
+    //Конфигурация In-Memory аутентификации:
 //    @Bean
 //    public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
 //        UserDetails admin = User.builder().username("admin").password(passwordEncoder.encode("admin")).roles("ADMIN").build();
@@ -53,15 +63,19 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-                return http
-                        .csrf(AbstractHttpConfigurer::disable)
-                        .authorizeHttpRequests(auth -> auth
-                                .requestMatchers("/welcome").permitAll()
-                                .anyRequest().authenticated())
+        return http
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/welcome").permitAll()
+                        .anyRequest().authenticated())
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/home",true)
+                        .defaultSuccessUrl("/home", true)
                         .permitAll())
+                .logout(logout -> logout
+                        .logoutSuccessUrl("/login?logout")
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID"))
                 .build();
     }
 }
