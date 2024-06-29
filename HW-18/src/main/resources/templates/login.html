@@ -69,6 +69,15 @@
         .remember-me input[type="checkbox"] {
             margin-right: 5px;
         }
+        /* Стилизация блока ошибки */
+        .err {
+            color: red;
+            font-weight: bold;
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid red;
+            border-radius: 4px;
+        }
     </style>
 </head>
 <body>
@@ -88,6 +97,9 @@
     </div>
     <div>
         <button type="submit">Войти</button>
+    </div>
+    <div class="err" th:if="${param.error}">
+        Ошибка авторизации: неверный логин или пароль!
     </div>
 </form>
 </body>
