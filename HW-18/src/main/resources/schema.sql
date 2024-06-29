@@ -1,5 +1,3 @@
-truncate table db_security.users CASCADE;
-
 CREATE TABLE if not exists db_security.users (
     username VARCHAR(50) PRIMARY KEY NOT NULL,
     password VARCHAR(100) NOT NULL,
@@ -11,3 +9,5 @@ CREATE TABLE if not exists db_security.authorities (
     authority VARCHAR(50) NOT NULL,
     CONSTRAINT fk_authorities_users FOREIGN KEY (username) REFERENCES db_security.users (username)
 );
+
+truncate table db_security.users CASCADE;

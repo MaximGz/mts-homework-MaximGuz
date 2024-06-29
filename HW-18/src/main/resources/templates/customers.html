@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>Домашняя страница</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -43,6 +43,17 @@
             background-color: #3e8e41;
         }
 
+        .logout-button {
+            background-color: #f44336; /* Red color */
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .logout-button:hover {
+            background-color: #d32f2f;
+        }
+
         /* Стили для таблицы */
         table {
             border-collapse: collapse;
@@ -62,16 +73,50 @@
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
+
+        .link-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .link-container input[type="text"] {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .link-container button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .link-container button:hover {
+            background-color: #3e8e41;
+        }
     </style>
 </head>
 <body>
-<h1>Home Page</h1>
-<p>Welcome to the home page!</p>
+<h1>Домашняя страница</h1>
+<p>Добро пожаловать на домашнюю страницу!</p>
 
 <div style="display: flex;">
-    <a href="/v1/all">All Customers</a>
-    <a href="/v1/">Link Index</a>
-    <a href="/logout">Logout</a>
+    <a href="/v1/all">Все клиенты</a>
+</div>
+
+<a href="/logout" class="logout-button">Выйти</a>
+
+<div class="link-container">
+    <p>Введите ID для перехода к конкретному клиенту:</p>
+    <input type="text" id="numberInput" placeholder="Введите число" onkeypress="return isNumber(event)">
+    <button onclick="navigate()">Перейти</button>
 </div>
 
 <div style="margin-top: 30px;">
@@ -101,5 +146,22 @@
         </tbody>
     </table>
 </div>
+
+<script>
+    function navigate() {
+        var number = document.getElementById("numberInput").value;
+        if (number) {
+            window.location.href = "/v1/" + number;
+        }
+    }
+
+    function isNumber(event) {
+        var charCode = event.which ? event.which : event.keyCode;
+        if (charCode < 48 || charCode > 57) {
+            return false;
+        }
+        return true;
+    }
+</script>
 </body>
 </html>

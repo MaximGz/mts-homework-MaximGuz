@@ -59,21 +59,35 @@
         button[type="submit"]:hover {
             background-color: #3e8e41;
         }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .remember-me input[type="checkbox"] {
+            margin-right: 5px;
+        }
     </style>
 </head>
 <body>
-<h1>Login Page</h1>
+<h1>Страница авторизации</h1>
 <form method="post" action="/login">
     <div>
-        <label for="username">Username:</label>
+        <label for="username">Логин:</label>
         <input type="text" id="username" name="username" />
     </div>
     <div>
-        <label for="password">Password:</label>
+        <label for="password">Пароль:</label>
         <input type="password" id="password" name="password" />
     </div>
+    <div class="remember-me">
+        <label for="remember-me">Запомнить меня</label>
+        <input type="checkbox" id="remember-me" name="remember-me">
+    </div>
     <div>
-        <button type="submit">Login</button>
+        <button type="submit">Войти</button>
     </div>
 </form>
 </body>
