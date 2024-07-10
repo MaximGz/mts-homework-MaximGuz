@@ -16,9 +16,8 @@ spring:
     hikari:
       connection-timeout: 20000
       maximum-pool-size: 5
-      schema: public
-      #connection-init-sql: truncate table db_security.users CASCADE;
-      connection-init-sql: CREATE SCHEMA if not exists "db_security";
+      schema: db_security
+      #connection-init-sql: CREATE SCHEMA if not exists "db_security";
   jpa:
     hibernate:
       ddl-auto: none
@@ -34,3 +33,8 @@ logging:
   level:
     org.springframework.security: DEBUG
     org.springframework.web: DEBUG
+token:
+  signing:
+    key: 53A73E5F1C4E0A2D3B5F2D784E6A1B423D6F247D1F6E5C3A596D635A75327855
+server:
+  port: 8090
